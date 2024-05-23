@@ -1,0 +1,27 @@
+{
+  "name": "@rgbpp-sdk/ckb",
+  "version": "0.1.0",
+  "scripts": {
+    "test": "vitest",
+    "format": "prettier --check 'src/*.ts'",
+    "lint": "eslint --ext .ts src/*"
+  },
+  "types": "./lib/index.d.ts",
+  "dependencies": {
+    "@rgbpp-sdk/ckb": "^0.1.0",
+    "axios": "^1.6.8"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.0",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3",
+    "vitest": "^1.4.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
