@@ -1,52 +1,52 @@
 {
   "rgbpp": {
     "testnet": {
-		    "outPoint": { 
-			    "txHash": "0xf1de59e973b85791ec32debbba08dff80c63197e895eb95d67fc1e9f6b413e00", 
-			    "index": "0x0"
-			   },
-		    "depType": "code"
-		  },
+      "outPoint": {
+        "txHash": "0xf1de59e973b85791ec32debbba08dff80c63197e895eb95d67fc1e9f6b413e00",
+        "index": "0x0"
+      },
+      "depType": "code"
+    },
     "mainnet": {
-	    "outPoint": { 
-			    "txHash": "0x04c5c3e69f1aa6ee27fb9de3d15a81704e387ab3b453965adbe0b6ca343c6f41", 
-			    "index": "0x0"
-			   },
-		    "depType": "code"
-	  }
-	},
+      "outPoint": {
+        "txHash": "0x04c5c3e69f1aa6ee27fb9de3d15a81704e387ab3b453965adbe0b6ca343c6f41",
+        "index": "0x0"
+      },
+      "depType": "code"
+    }
+  },
   "btcTime": {
     "testnet": {
-		    "outPoint": { 
-			    "txHash": "0xde0f87878a97500f549418e5d46d2f7704c565a262aa17036c9c1c13ad638529", 
-			    "index": "0x0"
-			   },
-		    "depType": "code"
-		  },
-      "mainnet": {
-        "outPoint": { 
-            "txHash": "0x6257bf4297ee75fcebe2654d8c5f8d93bc9fc1b3dc62b8cef54ffe166162e996", 
-            "index": "0x0"
-          },
-          "depType": "code"
-      }
+      "outPoint": {
+        "txHash": "0xde0f87878a97500f549418e5d46d2f7704c565a262aa17036c9c1c13ad638529",
+        "index": "0x0"
+      },
+      "depType": "code"
+    },
+    "mainnet": {
+      "outPoint": {
+        "txHash": "0x6257bf4297ee75fcebe2654d8c5f8d93bc9fc1b3dc62b8cef54ffe166162e996",
+        "index": "0x0"
+      },
+      "depType": "code"
+    }
   },
   "xudt": {
     "testnet": {
-		    "outPoint": { 
-			    "txHash": "0xbf6fb538763efec2a70a6a3dcb7242787087e1030c4e7d86585bc63a9d337f5f", 
-			    "index": "0x0"
-			   },
-		    "depType": "code"
-		  }
+      "outPoint": {
+        "txHash": "0xbf6fb538763efec2a70a6a3dcb7242787087e1030c4e7d86585bc63a9d337f5f",
+        "index": "0x0"
+      },
+      "depType": "code"
+    }
   },
   "unique": {
     "testnet": {
-		    "outPoint": { 
-			    "txHash": "0xff91b063c78ed06f10a1ed436122bd7d671f9a72ef5f5fa28d05252c17cf4cef", 
-			    "index": "0x0"
-			   },
-		    "depType": "code"
-		  }
+      "outPoint": {
+        "txHash": "0xff91b063c78ed06f10a1ed436122bd7d671f9a72ef5f5fa28d05252c17cf4cef",
+        "index": "0x0"
+      },
+      "depType": "code"
+    }
   }
 }
