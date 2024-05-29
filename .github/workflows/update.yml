@@ -5,13 +5,20 @@ on:
     - cron: '*/5 * * * *'  # Run every 5 minutes
 
 jobs:
-  my-job:
+  Update:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3.5.0
+        with:
+          node-version: '20'
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 8
+      - name: Install dependency
+        run: pnpm install
 
-      - name: Run your task
+      - name: Update CellDeps
         run: |
           pnpm update:cellDeps

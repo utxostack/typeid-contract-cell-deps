@@ -5,23 +5,18 @@ on:
   push:
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3.5.0
         with:
-          node-version: 20.x
-
-      - uses: pnpm/action-setup@v3
-        name: Install -g pnpm
+          node-version: '20'
+      - uses: pnpm/action-setup@v2.2.4
         with:
           version: 8
-          run_install: false
-
-      - name: Install dependencies
+      - name: Install dependency
         run: pnpm install
-
-      - name: Lint packages
+      - name: Lint
         run: pnpm lint
         
