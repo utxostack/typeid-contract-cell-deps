@@ -1,5 +1,12 @@
 {
   "rgbpp": {
+    "mainnet": {
+      "outPoint": {
+        "index": "0x0",
+        "txHash": "0x04c5c3e69f1aa6ee27fb9de3d15a81704e387ab3b453965adbe0b6ca343c6f41"
+      },
+      "depType": "code"
+    },
     "testnet": {
       "outPoint": {
         "index": "0x0",
@@ -7,15 +14,22 @@
       },
       "depType": "code"
     },
-    "mainnet": {
+    "signet": {
       "outPoint": {
         "index": "0x0",
-        "txHash": "0x04c5c3e69f1aa6ee27fb9de3d15a81704e387ab3b453965adbe0b6ca343c6f41"
+        "txHash": "0x61efdeddbaa0bb4132c0eb174b3e8002ff5ec430f61ba46f30768d683c516eec"
       },
       "depType": "code"
     }
   },
   "btcTime": {
+    "mainnet": {
+      "outPoint": {
+        "index": "0x0",
+        "txHash": "0x6257bf4297ee75fcebe2654d8c5f8d93bc9fc1b3dc62b8cef54ffe166162e996"
+      },
+      "depType": "code"
+    },
     "testnet": {
       "outPoint": {
         "index": "0x0",
@@ -23,10 +37,10 @@
       },
       "depType": "code"
     },
-    "mainnet": {
+    "signet": {
       "outPoint": {
         "index": "0x0",
-        "txHash": "0x6257bf4297ee75fcebe2654d8c5f8d93bc9fc1b3dc62b8cef54ffe166162e996"
+        "txHash": "0x5364b3535965e9eac9a35dd7af8e9e45a61d30a16e115923c032f80b28783e21"
       },
       "depType": "code"
     }

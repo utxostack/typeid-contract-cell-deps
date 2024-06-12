@@ -7,10 +7,12 @@ interface CellDepsObject {
   rgbpp: {
     mainnet: CKBComponents.CellDep;
     testnet: CKBComponents.CellDep;
+    signet: CKBComponents.CellDep;
   };
   btcTime: {
     mainnet: CKBComponents.CellDep;
     testnet: CKBComponents.CellDep;
+    signet: CKBComponents.CellDep;
   };
   xudt: {
     testnet: CKBComponents.CellDep;
@@ -32,12 +34,14 @@ const fetchAndUpdateCellDeps = async () => {
 
   const cellDepsObj: CellDepsObject = {
     rgbpp: {
-      testnet: await fetchRgbppCellDep(testnetCollector, false),
-      mainnet: await fetchRgbppCellDep(mainnetCollector, true),
+      mainnet: await fetchRgbppCellDep(mainnetCollector, 'Mainnet'),
+      testnet: await fetchRgbppCellDep(testnetCollector, 'Testnet3'),
+      signet: await fetchRgbppCellDep(testnetCollector, 'Signet'),
     },
     btcTime: {
-      testnet: await fetchBtcTimeCellDep(testnetCollector, false),
-      mainnet: await fetchBtcTimeCellDep(mainnetCollector, true),
+      mainnet: await fetchBtcTimeCellDep(mainnetCollector, 'Mainnet'),
+      testnet: await fetchBtcTimeCellDep(testnetCollector, 'Testnet3'),
+      signet: await fetchBtcTimeCellDep(testnetCollector, 'Signet'),
     },
     xudt: {
       testnet: await fetchXudtTestnetCellDep(testnetCollector),
