@@ -1,8 +1,10 @@
-name: Update CellDeps Every 30 Minutes
+name: Update CellDeps 
+# Every 30 Minutes
 
 on:
-  schedule:
-    - cron: '*/30 * * * *'  # Run every 30 minutes
+  pull_request:
+  # schedule:
+  #   - cron: '*/30 * * * *'  # Run every 30 minutes
 
 jobs:
   Update:
