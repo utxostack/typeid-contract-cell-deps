@@ -1,7 +1,13 @@
 import { Collector } from '@rgbpp-sdk/ckb';
 import * as fs from 'fs';
 import * as path from 'path';
-import { fetchBtcTimeCellDep, fetchRgbppCellDep, fetchUniqueTestnetCellDep, fetchXudtTestnetCellDep } from './typeid';
+import {
+  fetchBtcTimeCellDep,
+  fetchCompatibleXudtCellDeps,
+  fetchRgbppCellDep,
+  fetchUniqueTestnetCellDep,
+  fetchXudtTestnetCellDep,
+} from './typeid';
 
 interface CellDepsObject {
   rgbpp: {
@@ -19,6 +25,9 @@ interface CellDepsObject {
   };
   unique: {
     testnet: CKBComponents.CellDep;
+  };
+  compatibleXudt: {
+    [codeHash: string]: CKBComponents.CellDep;
   };
 }
 
@@ -49,6 +58,7 @@ const fetchAndUpdateCellDeps = async () => {
     unique: {
       testnet: await fetchUniqueTestnetCellDep(testnetCollector),
     },
+    compatibleXudt: await fetchCompatibleXudtCellDeps(testnetCollector, mainnetCollector),
   };
 
   // Convert the object to JSON string
