@@ -55,9 +55,11 @@ const xudtTestnetDeploymentTypeScript = (): CKBComponents.Script => {
 };
 
 const rusdCodeHashAndDeploymentTypeScript = (isMainnet: boolean) => {
+  // https://testnet.explorer.nervos.org/xudt/0x45b32a2bc4285d0a09678eb11960ddc8707bc2779887a09d482e9bfe9a2cdf52
+  // https://explorer.nervos.org/xudt/0x71ff665b40ba044b1981ea9a8965189559c8e01e8cdfa34a3cc565e1f870a95c
   const codeHash = isMainnet
     ? '0x26a33e0815888a4a0614a0b7d09fa951e0993ff21e55905510104a0b1312032b'
-    : '0x25c29dc317811a6f6f3985a7a9ebc4838bd388d19d0feeecf0bcd60f6c0975bb';
+    : '0x1142755a044bf2ee358cba9f2da187ce928c91cd4dc8692ded0337efa677d21a';
   return isMainnet
     ? {
         codeHash,
