@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "scripts": {
     "update:cellDeps": "npx ts-node src/index.ts",
-    "format": "prettier --write 'src/*.ts'",
+    "format": "prettier --write '{src, }/*.ts'",
     "lint": "eslint --ext .ts src/*"
   },
   "types": "./lib/index.d.ts",
   "dependencies": {
     "@rgbpp-sdk/ckb": "^0.1.0",
+    "@vercel/node": "^3.2.23",
     "axios": "^1.6.8"
   },
   "devDependencies": {
@@ -18,7 +19,8 @@
     "eslint": "^8.56.0",
     "prettier": "^3.2.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "zod": "^3.23.8"
   },
   "publishConfig": {
     "access": "public"

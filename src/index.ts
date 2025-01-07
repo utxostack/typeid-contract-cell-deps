@@ -31,7 +31,7 @@ interface CellDepsObject {
   };
 }
 
-const fetchAndUpdateCellDeps = async () => {
+export const fetchCellDeps = async () => {
   const testnetCollector = new Collector({
     ckbNodeUrl: 'https://testnet.ckb.dev/rpc',
     ckbIndexerUrl: 'https://testnet.ckb.dev/indexer',
@@ -62,8 +62,11 @@ const fetchAndUpdateCellDeps = async () => {
   };
 
   // Convert the object to JSON string
-  const jsonData = JSON.stringify(cellDepsObj, null, 2); // null and 2 for pretty formatting
+  return JSON.stringify(cellDepsObj, null, 2); // null and 2 for pretty formatting
+};
 
+const fetchAndUpdateCellDeps = async () => {
+  const jsonData = await fetchCellDeps();
   // Specify the file path
   const filePath = path.join(__dirname, '..', 'deployment/cell-deps.json');
 
