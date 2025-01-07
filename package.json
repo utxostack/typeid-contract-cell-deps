@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "update:cellDeps": "npx ts-node src/index.ts",
-    "format": "prettier --write '{src, }/*.ts'",
+    "format": "prettier --write '{src, api}/*.ts'",
     "lint": "eslint --ext .ts src/*"
   },
   "types": "./lib/index.d.ts",
