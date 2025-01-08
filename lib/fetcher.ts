@@ -5,7 +5,7 @@ import {
   fetchRgbppCellDep,
   fetchUniqueTestnetCellDep,
   fetchXudtTestnetCellDep,
-} from './typeid';
+} from './typeid.js';
 
 interface CellDepsObject {
   rgbpp: {

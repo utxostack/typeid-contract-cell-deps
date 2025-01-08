@@ -8,8 +8,7 @@
     "lint": "eslint --ext .ts"
   },
   "dependencies": {
-    "@rgbpp-sdk/ckb": "^0.1.0",
-    "@nervosnetwork/ckb-sdk-utils": "0.109.3",
+    "@rgbpp-sdk/ckb": "^0.6.0",
     "axios": "^1.6.8",
     "zod": "^3.23.8"
   },
