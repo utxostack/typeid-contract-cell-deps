@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { ZodError } from 'zod';
-import { fetchCellDeps } from "../src/fetcher"
+import { fetchCellDeps } from "../lib/fetcher"
 
 export default async function handler(_req: VercelRequest, res: VercelResponse) {
   try {

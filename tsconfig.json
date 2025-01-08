@@ -20,7 +20,7 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "include": ["src", "api"],
+  "include": ["lib", "api"],
   "exclude": ["node_modules"],
   "ts-node": {
     "esm": true
