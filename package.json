@@ -1,26 +1,26 @@
 {
   "name": "typeid-contract-cell-deps",
   "version": "0.1.0",
+  "type": "module",
   "scripts": {
-    "update:cellDeps": "npx ts-node src/index.ts",
+    "update:cellDeps": "npx tsx src/index.ts",
     "format": "prettier --write '{src, api}/*.ts'",
-    "lint": "eslint --ext .ts src/*"
+    "lint": "eslint --ext .ts"
   },
-  "types": "./lib/index.d.ts",
   "dependencies": {
     "@rgbpp-sdk/ckb": "^0.1.0",
-    "@vercel/node": "^3.2.23",
-    "axios": "^1.6.8"
+    "axios": "^1.6.8",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@vercel/node": "^3.2.23",
     "@types/lodash": "^4.17.0",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
     "eslint": "^8.56.0",
     "prettier": "^3.2.5",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.4.3",
-    "zod": "^3.23.8"
+    "tsx": "^4.19.2",
+    "typescript": "^5.4.3"
   },
   "publishConfig": {
     "access": "public"
