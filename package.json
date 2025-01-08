@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "update:cellDeps": "npx tsx src/index.ts",
-    "format": "prettier --write '{src, api}/*.ts'",
+    "update:cellDeps": "npx tsx lib/index.ts",
+    "format": "prettier --write '{lib, api}/*.ts'",
     "lint": "eslint --ext .ts"
   },
   "dependencies": {
-    "@rgbpp-sdk/ckb": "^0.1.0",
+    "@rgbpp-sdk/ckb": "^0.6.0",
     "axios": "^1.6.8",
     "zod": "^3.23.8"
   },
