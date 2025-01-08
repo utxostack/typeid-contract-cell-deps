@@ -1,8 +1,8 @@
-import type { VercelResponse } from '@vercel/node';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { ZodError } from 'zod';
 import { fetchCellDeps } from "../src/index"
 
-export default async function handler(res: VercelResponse) {
+export default async function handler(_req: VercelRequest, res: VercelResponse) {
   try {
     const cellDeps = await fetchCellDeps();
     return res.json(JSON.parse(cellDeps));
