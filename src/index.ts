@@ -68,6 +68,7 @@ export const fetchCellDeps = async () => {
 const fetchAndUpdateCellDeps = async () => {
   const jsonData = await fetchCellDeps();
   // Specify the file path
+  const __dirname = path.dirname(new URL(import.meta.url).pathname);
   const filePath = path.join(__dirname, '..', 'deployment/cell-deps.json');
 
   // Write JSON string to file
