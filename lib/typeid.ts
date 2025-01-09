@@ -64,7 +64,19 @@ const utxoAirdropBadgeDeploymentTypeScript = (isMainnet: boolean): CKBComponents
     ...TYPEID_DEPLOYMENT_TYPE_SCRIPT,
     args,
   };
-}
+};
+
+const tokenMetadataDeploymentTypeScript = (isMainnet: boolean): CKBComponents.Script => {
+  // Get the testnet type script of the output(https://testnet.explorer.nervos.org/transaction/0xfa0a6821293cc1ef4ee67a900862208e27f67b98237c9b13bf93c84607c5cd33#0)
+  const args = '0x916b69d15e4e7341d7a41ed48e75b8aac14cc64fa0f66de0f7f1b6bc9360978b';
+  if (isMainnet) {
+    // To be updated
+  }
+  return {
+    ...TYPEID_DEPLOYMENT_TYPE_SCRIPT,
+    args,
+  };
+};
 
 const rusdCodeHashAndDeploymentTypeScript = (isMainnet: boolean) => {
   // https://testnet.explorer.nervos.org/xudt/0x45b32a2bc4285d0a09678eb11960ddc8707bc2779887a09d482e9bfe9a2cdf52
@@ -136,6 +148,20 @@ export const fetchUniqueTestnetCellDep = async (collector: Collector): Promise<C
   const [cell] = await collector.getCells({ type: uniqueTestnetDeploymentTypeScript() });
   if (!cell) {
     throw new Error('No unique type deployment live cell found');
+  }
+  return {
+    outPoint: cell.outPoint,
+    depType: 'code',
+  };
+};
+
+export const fetchTokenMetadataCellDeps = async (
+  collector: Collector,
+  isMainnet: boolean,
+): Promise<CKBComponents.CellDep> => {
+  const [cell] = await collector.getCells({ type: tokenMetadataDeploymentTypeScript(isMainnet) });
+  if (!cell) {
+    throw new Error('No token metadata type deployment live cell found');
   }
   return {
     outPoint: cell.outPoint,
