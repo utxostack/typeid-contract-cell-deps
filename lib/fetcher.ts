@@ -4,6 +4,7 @@ import {
   fetchCompatibleXudtCellDeps,
   fetchRgbppCellDep,
   fetchUniqueTestnetCellDep,
+  fetchUtxoAirdropBadgeCellDeps,
   fetchXudtTestnetCellDep,
 } from './typeid.js';
 
@@ -24,6 +25,9 @@ interface CellDepsObject {
   unique: {
     testnet: CKBComponents.CellDep;
   };
+  utxoAirdropBadge: {
+    testnet: CKBComponents.CellDep;
+  }
   compatibleXudt: {
     [codeHash: string]: CKBComponents.CellDep;
   };
@@ -55,6 +59,9 @@ export const fetchCellDeps = async () => {
     },
     unique: {
       testnet: await fetchUniqueTestnetCellDep(testnetCollector),
+    },
+    utxoAirdropBadge: {
+      testnet: await fetchUtxoAirdropBadgeCellDeps(testnetCollector, false),
     },
     compatibleXudt: await fetchCompatibleXudtCellDeps(testnetCollector, mainnetCollector),
   };
