@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const singleTask = async (taskName: string, url: string) => {
   const start = new Date().getTime();
@@ -13,10 +13,10 @@ const singleTask = async (taskName: string, url: string) => {
       console.error(e);
     }
   }
-  
+
   const end = new Date().getTime();
   console.log(`${taskName} average time: ${(end - start) / 10}ms in 10 requests`);
-}
+};
 
 (async () => {
   await singleTask('Vercel API fetching', 'https://typeid-contract-cell-deps.vercel.app/api/cell-deps');

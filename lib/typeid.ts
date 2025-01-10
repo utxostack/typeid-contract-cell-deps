@@ -5,7 +5,7 @@ import compatibleData from '../compatible-udt.json' assert { type: 'json' };
 export type BTCNetworkType = 'Mainnet' | 'Testnet3' | 'Signet';
 
 type CompatibleXudt = {
-  network: "mainnet" | "testnet";
+  network: 'mainnet' | 'testnet';
   codeHash: string;
   deploymentTypeArgs: string;
 };
@@ -190,5 +190,5 @@ export const fetchCompatibleXudtCellDeps = async (
       },
     };
   }
-  return cellDeps
+  return cellDeps;
 };
