@@ -1,12 +1,23 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { ZodError } from 'zod';
+import { ZodError, z } from 'zod';
 import { fetchCellDeps } from "../lib/fetcher.js"
 
-export default async function handler(_req: VercelRequest, res: VercelResponse) {
+const CellDepsProps = z.object({
+  rgbpp: z.enum(['true', 'false']).default('true'),
+  btcTime: z.enum(['true', 'false']).default('true'),
+  xudt: z.enum(['true', 'false']).default('true'),
+  unique: z.enum(['true', 'false']).default('true'),
+  tokenMetadata: z.enum(['true', 'false']).default('true'),
+  utxoAirdropBadge: z.enum(['true', 'false']).default('true'),
+  compatibleUdtCodeHashes: z.string().default(''),
+});
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  const query = CellDepsProps.parse(req.query);
   try {
-    const cellDeps = await fetchCellDeps();
+    const cellDeps = await fetchCellDeps(query);
     res
-      .setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate=59')
+      .setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate')
       .setHeader('CDN-Cache-Control', 'public, s-maxage=60')
       .setHeader('Vercel-CDN-Cache-Control', 'public, s-maxage=60');
     return res.json(JSON.parse(cellDeps));

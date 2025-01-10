@@ -17,10 +17,7 @@ const singleTask = async (taskName: string, url: string) => {
 };
 
 (async () => {
-  await singleTask(
-    'Vercel API fetching',
-    'https://typeid-contract-cell-deps-git-feat-costomize-and-test-godwoken.vercel.app/api/cell-deps',
-  );
+  await singleTask('Vercel API fetching', 'https://typeid-contract-cell-deps.vercel.app/api/cell-deps');
   await singleTask('Vercel static fetching', 'https://typeid-contract-cell-deps.vercel.app/deployment/cell-deps.json');
   await singleTask(
     'GitHub static fetching',

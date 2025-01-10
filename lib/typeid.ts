@@ -169,10 +169,14 @@ export const fetchUtxoAirdropBadgeCellDeps = async (
 export const fetchCompatibleXudtCellDeps = async (
   testnetCollector: Collector,
   mainnetCollector: Collector,
+  udtCodeHashes?: string,
 ): Promise<{ [codeHash: string]: CKBComponents.CellDep }> => {
   const compatibleXudts = compatibleData as CompatibleXudt[];
   let cellDeps: { [codeHash: string]: CKBComponents.CellDep } = {};
   for (const { network, codeHash, deploymentTypeArgs } of compatibleXudts) {
+    if (udtCodeHashes && udtCodeHashes.length > 0 && !udtCodeHashes.includes(codeHash)) {
+      continue;
+    }
     const type = {
       ...TYPEID_DEPLOYMENT_TYPE_SCRIPT,
       args: deploymentTypeArgs,
