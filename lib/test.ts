@@ -17,7 +17,8 @@ const singleTask = async (taskName: string, url: string) => {
 };
 
 (async () => {
-  await singleTask('Vercel API fetching', 'https://typeid-contract-cell-deps.vercel.app/api/cell-deps');
+  await singleTask('Cold Fetch:', 'https://typeid-contract-cell-deps.vercel.app/api/cell-deps');
+  await singleTask('Fetch Vercel edge cache:', 'https://typeid-contract-cell-deps.vercel.app/api/cell-deps');
   await singleTask('Vercel static fetching', 'https://typeid-contract-cell-deps.vercel.app/deployment/cell-deps.json');
   await singleTask(
     'GitHub static fetching',

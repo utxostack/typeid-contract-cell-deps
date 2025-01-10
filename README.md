@@ -6,13 +6,13 @@ The cell deps of the CKB contracts deployed by TypeID
 
 All the supported cellDeps can be fetched with the following Get HTTP request:
 
-```
+```bash
 curl -X GET "https://typeid-contract-cell-deps.vercel.app/api/cell-deps"
 ```
 
 If you want to filter specific cellDeps, append query parameters directly to the URL:
 
-```
+```bash
 curl -X GET "https://typeid-contract-cell-deps.vercel.app/api/filter-cell-deps?xudt=false&compatibleUdtCodeHashes=0x1142755a044bf2ee358cba9f2da187ce928c91cd4dc8692ded0337efa677d21a,0x26a33e0815888a4a0614a0b7d09fa951e0993ff21e55905510104a0b1312032b"
 ```
 
@@ -36,7 +36,7 @@ A fungible token that is fully compatible with xUDT can directly submit the depl
 
 The fully-compatible-xUDT JSON format is like this:
 
-```
+```json
 {
   "_description": "RUSD testnet code hash and deployment type script args",
   "_udt_link": "https://testnet.explorer.nervos.org/xudt/0x45b32a2bc4285d0a09678eb11960ddc8707bc2779887a09d482e9bfe9a2cdf52",
