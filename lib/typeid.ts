@@ -1,6 +1,6 @@
-import { Collector, IndexerCell } from '@rgbpp-sdk/ckb';
+import { Collector } from '@rgbpp-sdk/ckb';
 
-import compatibleData from '../compatible-udt.json' assert { type: 'json' };
+import compatibleData from '../compatible-udt.json' with { type: 'json' };
 
 export type BTCNetworkType = 'Mainnet' | 'Testnet3' | 'Signet';
 

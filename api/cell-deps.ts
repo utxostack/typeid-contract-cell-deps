@@ -5,6 +5,10 @@ import { fetchCellDeps } from "../lib/fetcher.js"
 export default async function handler(_req: VercelRequest, res: VercelResponse) {
   try {
     const cellDeps = await fetchCellDeps();
+    res
+      .setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate=59')
+      .setHeader('CDN-Cache-Control', 'public, s-maxage=60')
+      .setHeader('Vercel-CDN-Cache-Control', 'public, s-maxage=60');
     return res.json(JSON.parse(cellDeps));
   } catch (e: any) {
     if (e instanceof ZodError) {
