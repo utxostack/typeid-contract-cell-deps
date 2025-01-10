@@ -174,7 +174,7 @@ export const fetchCompatibleXudtCellDeps = async (
   const compatibleXudts = compatibleData as CompatibleXudt[];
   let cellDeps: { [codeHash: string]: CKBComponents.CellDep } = {};
   for (const { network, codeHash, deploymentTypeArgs } of compatibleXudts) {
-    if (udtCodeHashes && udtCodeHashes.length > 0 && !udtCodeHashes.includes(codeHash)) {
+    if (typeof udtCodeHashes === 'string' && udtCodeHashes.length > 0 && !udtCodeHashes.includes(codeHash)) {
       continue;
     }
     const type = {
