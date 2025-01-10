@@ -19,6 +19,6 @@ jobs:
           run_install: false
       - name: Install dependency
         run: pnpm install
-      - name: Lint
+      - name: Test
         run: pnpm test
         

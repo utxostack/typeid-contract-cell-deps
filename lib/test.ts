@@ -1,11 +1,18 @@
 import axios from 'axios';
 
-const singleTask = async (taskName: string, url: string) => {
+const singleFetch = async (taskName: string, url: string) => {
   const start = new Date().getTime();
+  await axios.get(url, { timeout: 5000 });
+  const end = new Date().getTime();
+  console.log(`${taskName} single fetch time: ${end - start}ms`);
+};
+
+const singleTask = async (taskName: string, url: string) => {
   const promises = [];
   for (let i = 0; i < 10; i++) {
-    promises.push(axios.get(url, { timeout: 5000 }));
+    promises.push(singleFetch(taskName, url));
   }
+  const start = new Date().getTime();
   try {
     await Promise.all(promises);
   } catch (error: any) {
@@ -13,7 +20,6 @@ const singleTask = async (taskName: string, url: string) => {
       console.error(e);
     }
   }
-
   const end = new Date().getTime();
   console.log(`${taskName} average time: ${(end - start) / 10}ms in 10 requests`);
 };
