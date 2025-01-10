@@ -63,6 +63,24 @@
       "depType": "code"
     }
   },
+  "tokenMetadata": {
+    "testnet": {
+      "outPoint": {
+        "index": "0x0",
+        "txHash": "0xfa0a6821293cc1ef4ee67a900862208e27f67b98237c9b13bf93c84607c5cd33"
+      },
+      "depType": "code"
+    }
+  },
+  "utxoAirdropBadge": {
+    "testnet": {
+      "outPoint": {
+        "index": "0x2",
+        "txHash": "0xfa0a6821293cc1ef4ee67a900862208e27f67b98237c9b13bf93c84607c5cd33"
+      },
+      "depType": "code"
+    }
+  },
   "compatibleXudt": {
     "0x1142755a044bf2ee358cba9f2da187ce928c91cd4dc8692ded0337efa677d21a": {
       "outPoint": {

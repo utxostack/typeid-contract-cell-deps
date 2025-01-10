@@ -3,7 +3,9 @@ import {
   fetchBtcTimeCellDep,
   fetchCompatibleXudtCellDeps,
   fetchRgbppCellDep,
+  fetchTokenMetadataCellDeps,
   fetchUniqueTestnetCellDep,
+  fetchUtxoAirdropBadgeCellDeps,
   fetchXudtTestnetCellDep,
 } from './typeid.js';
 
@@ -24,6 +26,12 @@ interface CellDepsObject {
   unique: {
     testnet: CKBComponents.CellDep;
   };
+  tokenMetadata: {
+    testnet: CKBComponents.CellDep;
+  };
+  utxoAirdropBadge: {
+    testnet: CKBComponents.CellDep;
+  };
   compatibleXudt: {
     [codeHash: string]: CKBComponents.CellDep;
   };
@@ -39,24 +47,55 @@ export const fetchCellDeps = async () => {
     ckbIndexerUrl: 'https://mainnet.ckb.dev/indexer',
   });
 
+  const [
+    rgbppMainnet,
+    rgbppTestnet,
+    rgbppSignet,
+    btcTimeMainnet,
+    btcTimeTestnet,
+    btcTimeSignet,
+    xudtTestnet,
+    uniqueTestnet,
+    metadataTestnet,
+    utxoAirdropBadgeTestnet,
+    compatibleXudt,
+  ] = await Promise.all([
+    fetchRgbppCellDep(mainnetCollector, 'Mainnet'),
+    fetchRgbppCellDep(testnetCollector, 'Testnet3'),
+    fetchRgbppCellDep(testnetCollector, 'Signet'),
+    fetchBtcTimeCellDep(mainnetCollector, 'Mainnet'),
+    fetchBtcTimeCellDep(testnetCollector, 'Testnet3'),
+    fetchBtcTimeCellDep(testnetCollector, 'Signet'),
+    fetchXudtTestnetCellDep(testnetCollector),
+    fetchUniqueTestnetCellDep(testnetCollector),
+    fetchTokenMetadataCellDeps(testnetCollector, false),
+    fetchUtxoAirdropBadgeCellDeps(testnetCollector, false),
+    fetchCompatibleXudtCellDeps(testnetCollector, mainnetCollector),
+  ]);
   const cellDepsObj: CellDepsObject = {
     rgbpp: {
-      mainnet: await fetchRgbppCellDep(mainnetCollector, 'Mainnet'),
-      testnet: await fetchRgbppCellDep(testnetCollector, 'Testnet3'),
-      signet: await fetchRgbppCellDep(testnetCollector, 'Signet'),
+      mainnet: rgbppMainnet,
+      testnet: rgbppTestnet,
+      signet: rgbppSignet,
     },
     btcTime: {
-      mainnet: await fetchBtcTimeCellDep(mainnetCollector, 'Mainnet'),
-      testnet: await fetchBtcTimeCellDep(testnetCollector, 'Testnet3'),
-      signet: await fetchBtcTimeCellDep(testnetCollector, 'Signet'),
+      mainnet: btcTimeMainnet,
+      testnet: btcTimeTestnet,
+      signet: btcTimeSignet,
     },
     xudt: {
-      testnet: await fetchXudtTestnetCellDep(testnetCollector),
+      testnet: xudtTestnet,
     },
     unique: {
-      testnet: await fetchUniqueTestnetCellDep(testnetCollector),
+      testnet: uniqueTestnet,
     },
-    compatibleXudt: await fetchCompatibleXudtCellDeps(testnetCollector, mainnetCollector),
+    tokenMetadata: {
+      testnet: metadataTestnet,
+    },
+    utxoAirdropBadge: {
+      testnet: utxoAirdropBadgeTestnet,
+    },
+    compatibleXudt,
   };
 
   // Convert the object to JSON string
