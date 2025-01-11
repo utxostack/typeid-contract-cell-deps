@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "ES2020",
+    "target": "ESNext",
+    "module": "ESNext",
     "composite": false,
     "resolveJsonModule": true,
     "strictNullChecks": true,

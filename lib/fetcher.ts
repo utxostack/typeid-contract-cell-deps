@@ -10,34 +10,44 @@ import {
 } from './typeid.js';
 
 interface CellDepsObject {
-  rgbpp: {
-    mainnet: CKBComponents.CellDep;
-    testnet: CKBComponents.CellDep;
-    signet: CKBComponents.CellDep;
+  rgbpp?: {
+    mainnet?: CKBComponents.CellDep;
+    testnet?: CKBComponents.CellDep;
+    signet?: CKBComponents.CellDep;
   };
-  btcTime: {
-    mainnet: CKBComponents.CellDep;
-    testnet: CKBComponents.CellDep;
-    signet: CKBComponents.CellDep;
+  btcTime?: {
+    mainnet?: CKBComponents.CellDep;
+    testnet?: CKBComponents.CellDep;
+    signet?: CKBComponents.CellDep;
   };
-  xudt: {
-    testnet: CKBComponents.CellDep;
+  xudt?: {
+    testnet?: CKBComponents.CellDep;
   };
-  unique: {
-    testnet: CKBComponents.CellDep;
+  unique?: {
+    testnet?: CKBComponents.CellDep;
   };
-  tokenMetadata: {
-    testnet: CKBComponents.CellDep;
+  tokenMetadata?: {
+    testnet?: CKBComponents.CellDep;
   };
-  utxoAirdropBadge: {
-    testnet: CKBComponents.CellDep;
+  utxoAirdropBadge?: {
+    testnet?: CKBComponents.CellDep;
   };
-  compatibleXudt: {
+  compatibleXudt?: {
     [codeHash: string]: CKBComponents.CellDep;
   };
 }
 
-export const fetchCellDeps = async () => {
+export interface CellDepsRequest {
+  rgbpp?: 'true' | 'false';
+  btcTime?: 'true' | 'false';
+  xudt?: 'true' | 'false';
+  unique?: 'true' | 'false';
+  tokenMetadata?: 'true' | 'false';
+  utxoAirdropBadge?: 'true' | 'false';
+  compatibleUdtCodeHashes?: string;
+}
+
+export const fetchCellDeps = async (req?: CellDepsRequest) => {
   const testnetCollector = new Collector({
     ckbNodeUrl: 'https://testnet.ckb.dev/rpc',
     ckbIndexerUrl: 'https://testnet.ckb.dev/indexer',
@@ -60,41 +70,53 @@ export const fetchCellDeps = async () => {
     utxoAirdropBadgeTestnet,
     compatibleXudt,
   ] = await Promise.all([
-    fetchRgbppCellDep(mainnetCollector, 'Mainnet'),
-    fetchRgbppCellDep(testnetCollector, 'Testnet3'),
-    fetchRgbppCellDep(testnetCollector, 'Signet'),
-    fetchBtcTimeCellDep(mainnetCollector, 'Mainnet'),
-    fetchBtcTimeCellDep(testnetCollector, 'Testnet3'),
-    fetchBtcTimeCellDep(testnetCollector, 'Signet'),
-    fetchXudtTestnetCellDep(testnetCollector),
-    fetchUniqueTestnetCellDep(testnetCollector),
-    fetchTokenMetadataCellDeps(testnetCollector, false),
-    fetchUtxoAirdropBadgeCellDeps(testnetCollector, false),
-    fetchCompatibleXudtCellDeps(testnetCollector, mainnetCollector),
+    req?.rgbpp === 'true' ? fetchRgbppCellDep(mainnetCollector, 'Mainnet') : undefined,
+    req?.rgbpp === 'true' ? fetchRgbppCellDep(testnetCollector, 'Testnet3') : undefined,
+    req?.rgbpp === 'true' ? fetchRgbppCellDep(testnetCollector, 'Signet') : undefined,
+    req?.btcTime === 'true' ? fetchBtcTimeCellDep(mainnetCollector, 'Mainnet') : undefined,
+    req?.btcTime === 'true' ? fetchBtcTimeCellDep(testnetCollector, 'Testnet3') : undefined,
+    req?.btcTime === 'true' ? fetchBtcTimeCellDep(testnetCollector, 'Signet') : undefined,
+    req?.xudt === 'true' ? fetchXudtTestnetCellDep(testnetCollector) : undefined,
+    req?.unique === 'true' ? fetchUniqueTestnetCellDep(testnetCollector) : undefined,
+    req?.tokenMetadata === 'true' ? fetchTokenMetadataCellDeps(testnetCollector, false) : undefined,
+    req?.utxoAirdropBadge === 'true' ? fetchUtxoAirdropBadgeCellDeps(testnetCollector, false) : undefined,
+    fetchCompatibleXudtCellDeps(testnetCollector, mainnetCollector, req?.compatibleUdtCodeHashes),
   ]);
   const cellDepsObj: CellDepsObject = {
-    rgbpp: {
-      mainnet: rgbppMainnet,
-      testnet: rgbppTestnet,
-      signet: rgbppSignet,
-    },
-    btcTime: {
-      mainnet: btcTimeMainnet,
-      testnet: btcTimeTestnet,
-      signet: btcTimeSignet,
-    },
-    xudt: {
-      testnet: xudtTestnet,
-    },
-    unique: {
-      testnet: uniqueTestnet,
-    },
-    tokenMetadata: {
-      testnet: metadataTestnet,
-    },
-    utxoAirdropBadge: {
-      testnet: utxoAirdropBadgeTestnet,
-    },
+    rgbpp: rgbppTestnet
+      ? {
+          mainnet: rgbppMainnet,
+          testnet: rgbppTestnet,
+          signet: rgbppSignet,
+        }
+      : undefined,
+    btcTime: btcTimeTestnet
+      ? {
+          mainnet: btcTimeMainnet,
+          testnet: btcTimeTestnet,
+          signet: btcTimeSignet,
+        }
+      : undefined,
+    xudt: xudtTestnet
+      ? {
+          testnet: xudtTestnet,
+        }
+      : undefined,
+    unique: uniqueTestnet
+      ? {
+          testnet: uniqueTestnet,
+        }
+      : undefined,
+    tokenMetadata: metadataTestnet
+      ? {
+          testnet: metadataTestnet,
+        }
+      : undefined,
+    utxoAirdropBadge: utxoAirdropBadgeTestnet
+      ? {
+          testnet: utxoAirdropBadgeTestnet,
+        }
+      : undefined,
     compatibleXudt,
   };
 

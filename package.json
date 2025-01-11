@@ -5,7 +5,8 @@
   "scripts": {
     "update:cellDeps": "npx tsx lib/index.ts",
     "format": "prettier --write '{lib, api}/*.ts'",
-    "lint": "eslint --ext .ts"
+    "lint": "eslint --ext .ts",
+    "test": "npx tsx lib/test.ts"
   },
   "dependencies": {
     "@rgbpp-sdk/ckb": "^0.6.0",

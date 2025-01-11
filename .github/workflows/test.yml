@@ -1,11 +1,11 @@
-name: Lint
+name: Test
 
 on:
   pull_request:
   push:
 
 jobs:
-  Lint:
+  Test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,6 +19,6 @@ jobs:
           run_install: false
       - name: Install dependency
         run: pnpm install
-      - name: Lint
-        run: pnpm lint
+      - name: Test
+        run: pnpm test
         

@@ -1,6 +1,14 @@
 import { Collector } from '@rgbpp-sdk/ckb';
 
+import compatibleData from '../compatible-udt.json' with { type: 'json' };
+
 export type BTCNetworkType = 'Mainnet' | 'Testnet3' | 'Signet';
+
+type CompatibleXudt = {
+  network: 'mainnet' | 'testnet';
+  codeHash: string;
+  deploymentTypeArgs: string;
+};
 
 const TYPEID_DEPLOYMENT_TYPE_SCRIPT: CKBComponents.Script = {
   codeHash: '0x00000000000000000000000000000000000000000000000000545950455f4944',
@@ -76,31 +84,6 @@ const tokenMetadataDeploymentTypeScript = (isMainnet: boolean): CKBComponents.Sc
     ...TYPEID_DEPLOYMENT_TYPE_SCRIPT,
     args,
   };
-};
-
-const rusdCodeHashAndDeploymentTypeScript = (isMainnet: boolean) => {
-  // https://testnet.explorer.nervos.org/xudt/0x45b32a2bc4285d0a09678eb11960ddc8707bc2779887a09d482e9bfe9a2cdf52
-  // https://explorer.nervos.org/xudt/0x71ff665b40ba044b1981ea9a8965189559c8e01e8cdfa34a3cc565e1f870a95c
-  const codeHash = isMainnet
-    ? '0x26a33e0815888a4a0614a0b7d09fa951e0993ff21e55905510104a0b1312032b'
-    : '0x1142755a044bf2ee358cba9f2da187ce928c91cd4dc8692ded0337efa677d21a';
-  return isMainnet
-    ? {
-        codeHash,
-        typeScript: {
-          ...TYPEID_DEPLOYMENT_TYPE_SCRIPT,
-          // Get the mainnet type script of the output(https://explorer.nervos.org/transaction/0x8ec1081bd03e5417bb4467e96f4cec841acdd35924538a35e7547fe320118977#0)
-          args: '0x953400cc4c55f1b0623faca8d90c5257eaa449a7d22179b5178d67fbf7f51bc2',
-        },
-      }
-    : {
-        codeHash,
-        typeScript: {
-          ...TYPEID_DEPLOYMENT_TYPE_SCRIPT,
-          // Get the testnet type script of the output(https://testnet.explorer.nervos.org/transaction/0xed7d65b9ad3d99657e37c4285d585fea8a5fcaf58165d54dacf90243f911548b#0)
-          args: '0x97d30b723c0b2c66e9cb8d4d0df4ab5d7222cbb00d4a9a2055ce2e5d7f0d8b0f',
-        },
-      };
 };
 
 export const fetchRgbppCellDep = async (
@@ -186,23 +169,30 @@ export const fetchUtxoAirdropBadgeCellDeps = async (
 export const fetchCompatibleXudtCellDeps = async (
   testnetCollector: Collector,
   mainnetCollector: Collector,
+  udtCodeHashes?: string,
 ): Promise<{ [codeHash: string]: CKBComponents.CellDep }> => {
+  const compatibleXudts = compatibleData as CompatibleXudt[];
   let cellDeps: { [codeHash: string]: CKBComponents.CellDep } = {};
-  for (const collector of [testnetCollector, mainnetCollector]) {
-    const pairs = [rusdCodeHashAndDeploymentTypeScript(collector === mainnetCollector)];
-    for (const { codeHash, typeScript } of pairs) {
-      const [cell] = await collector.getCells({ type: typeScript });
-      if (!cell) {
-        throw new Error('No compatible xudt type deployment live cell found');
-      }
-      cellDeps = {
-        ...cellDeps,
-        [codeHash]: {
-          outPoint: cell.outPoint,
-          depType: 'code',
-        },
-      };
+  for (const { network, codeHash, deploymentTypeArgs } of compatibleXudts) {
+    if (typeof udtCodeHashes === 'string' && udtCodeHashes.length > 0 && !udtCodeHashes.includes(codeHash)) {
+      continue;
     }
+    const type = {
+      ...TYPEID_DEPLOYMENT_TYPE_SCRIPT,
+      args: deploymentTypeArgs,
+    };
+    const collector = network === 'mainnet' ? mainnetCollector : testnetCollector;
+    const [cell] = await collector.getCells({ type });
+    if (!cell) {
+      throw new Error('No compatible xudt type deployment live cell found');
+    }
+    cellDeps = {
+      ...cellDeps,
+      [codeHash]: {
+        outPoint: cell.outPoint,
+        depType: 'code',
+      },
+    };
   }
   return cellDeps;
 };
