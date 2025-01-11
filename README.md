@@ -24,7 +24,7 @@ curl -X GET "https://typeid-contract-cell-deps.vercel.app/api/filter-cell-deps?x
 - **utxoAirdropBadge**: boolean, true means included, false means not included
 - **compatibleUdtCodeHashe**s: string, a comma-separated string to represent code hash array
 
-All the cellDeps will be cached for 10 ~ 60 seconds, and the cache detail can be found [here](./api/cell-deps.ts).
+All the cellDeps will be cached for 30 ~ 60 seconds, and the cache detail can be found [here](./api/cell-deps.ts).
 
 ## Compatible xUDT TypeId deployment information
 

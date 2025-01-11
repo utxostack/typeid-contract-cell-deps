@@ -9,7 +9,7 @@ const CellDepsProps = z.object({
   unique: z.enum(['true', 'false']).default('false'),
   tokenMetadata: z.enum(['true', 'false']).default('false'),
   utxoAirdropBadge: z.enum(['true', 'false']).default('false'),
-  compatibleUdtCodeHashes: z.string().default(''),
+  compatibleUdtCodeHashes: z.string().default(','),
 });
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -17,7 +17,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const cellDeps = await fetchCellDeps(query);
     res
-      .setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate')
+      .setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate')
       .setHeader('CDN-Cache-Control', 'public, s-maxage=60')
       .setHeader('Vercel-CDN-Cache-Control', 'public, s-maxage=60');
     return res.json(JSON.parse(cellDeps));
