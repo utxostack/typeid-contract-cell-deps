@@ -12,7 +12,7 @@ curl -X GET "https://typeid-contract-cell-deps.vercel.app/api/cell-deps"
 To filter specific cell deps, append query parameters to the URL:
 
 ```bash
-curl -X GET "https://typeid-contract-cell-deps.vercel.app/api/filter-cell-deps?xudt=false&compatibleUdtCodeHashes=0x1142755a044bf2ee358cba9f2da187ce928c91cd4dc8692ded0337efa677d21a,0x26a33e0815888a4a0614a0b7d09fa951e0993ff21e55905510104a0b1312032b"
+curl -X GET "https://typeid-contract-cell-deps.vercel.app/api/filter-cell-deps?xudt=true&compatibleUdtCodeHashes=0x1142755a044bf2ee358cba9f2da187ce928c91cd4dc8692ded0337efa677d21a,0x26a33e0815888a4a0614a0b7d09fa951e0993ff21e55905510104a0b1312032b"
 ```
 
 ### Query Parameters
