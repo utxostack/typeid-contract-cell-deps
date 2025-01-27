@@ -1,13 +1,12 @@
-name: Update CellDeps 
-# Every 30 Minutes
+name: Check CellDeps 
+# Every day at midnight (UTC)
 
 on:
   pull_request:
-  # schedule:
-  #   - cron: '*/30 * * * *'  # Run every 30 minutes
-
+  schedule:
+    - cron: '0 0 * * *'  # Run every day at midnight (UTC)
 jobs:
-  Update:
+  Check:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +23,6 @@ jobs:
       - name: Install dependency
         run: pnpm install
 
-      - name: Update CellDeps
+      - name: Check CellDeps
         run: |
-          pnpm update:cellDeps
+          pnpm check:cellDeps
