@@ -19,7 +19,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res
       .setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate')
       .setHeader('CDN-Cache-Control', 'public, s-maxage=60')
-      .setHeader('Vercel-CDN-Cache-Control', 'public, s-maxage=60');
+      .setHeader('Vercel-CDN-Cache-Control', 'public, s-maxage=60')
+      .setHeader('Access-Control-Allow-Origin', '*');
     return res.json(JSON.parse(cellDeps));
   } catch (e: any) {
     if (e instanceof ZodError) {
